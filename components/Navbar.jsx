@@ -49,7 +49,7 @@ const contactIcon = () => {
 };
 
 const Navbar = () => {
-  const menuItems = [
+  const mobileMenuItems = [
     {
       id: 1,
       name: "درباره ما",
@@ -59,7 +59,7 @@ const Navbar = () => {
     {
       id: 2,
       name: "خانه",
-      link: "/",
+      link: "/home",
       icon: homeIcon(),
     },
     {
@@ -69,21 +69,60 @@ const Navbar = () => {
       icon: contactIcon(),
     },
   ];
+  const desktopMenuItems = [
+    {
+      id: 1,
+      name: "خانه",
+      link: "/home",
+    },
+    {
+      id: 2,
+      name: "درباره ما",
+      link: "/about",
+    },
+    {
+      id: 3,
+      name: "ارتباط با ما",
+      link: "/contact",
+    },
+  ];
   return (
     <>
       {/* Mobile Menu */}
-      <div className="flex flex-col fixed bottom-0 left-0 right-0 bg-white w-screen mx-auto">
-        <div className="border border-gray-300 py-3 flex justify-between gap-1 shadow-xl rounded-md">
-          {menuItems.map((item) => (
+      <div className="flex flex-col fixed bottom-0 left-0 right-0 bg-white w-screen mx-auto sm:hidden">
+        <div className="border border-gray-300 py-3 flex justify-around gap-1 shadow-xl rounded-md">
+          {mobileMenuItems.map((item) => (
             <div key={item.id} className="group relative px-4 cursor-pointer">
               <div className="flex h-10 w-10 items-center justify-center rounded-full hover:text-blue-500">
                 <Link href={item.link}>{item.icon}</Link>
               </div>
-              <span className="absolute -top-8 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
+              <span className="absolute whitespace-nowrap -top-8 left-[50%] -translate-x-[50%] z-20 origin-left scale-0 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
                 {item.name}
               </span>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Desktop Menu */}
+      <div className="hidden sm:flex justify-around lg:justify-between lg:px-10 items-center">
+        {/* menu items */}
+        <div className="flex gap-2">
+          {
+            desktopMenuItems.map((item) => (
+              <Link key={item.id} href={item.link} className="flex hover:text-blue-500"> {item.name} </Link>
+            ))
+          }
+        </div>
+        {/* logo */}
+        <div>
+          <Image src={"/icon.png"} width={50} height={50} alt={"icon"}/>
+        </div>
+        {/* title */}
+        <div>
+          <h1>
+            مجله فرانت اند | Front Magzine
+          </h1>
         </div>
       </div>
     </>
